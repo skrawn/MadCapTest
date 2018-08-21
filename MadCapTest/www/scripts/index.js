@@ -5,12 +5,14 @@
 (function () {
     "use strict";
 
-    document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
+    document.addEventListener('deviceready', onDeviceReady.bind(this), false);
+    var inAppBrowser;
 
     function onDeviceReady() {
         // Handle the Cordova pause and resume events
         document.addEventListener( 'pause', onPause.bind( this ), false );
-        document.addEventListener( 'resume', onResume.bind( this ), false );
+        document.addEventListener('resume', onResume.bind(this), false);
+        document.getElementById('btnIab').addEventListener('click', openIab, false);
         
         // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
         var parentElement = document.getElementById('deviceready');
@@ -27,4 +29,15 @@
     function onResume() {
         // TODO: This application has been reactivated. Restore application state here.
     };
+
+    function openIab() {
+        inAppBrowser = cordova.InAppBrowser.open('assets/help/Default.htm', '_blank', 'location=yes,hidden=no');
+        inAppBrowser.addEventListener('loadstop', iabLoadStop);
+    }
+
+    function iabLoadStop() {
+        if (inAppBrowser !== undefined) {
+            inAppBrowser.show();
+        }
+    }
 } )();
