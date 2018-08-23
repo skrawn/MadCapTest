@@ -31,7 +31,7 @@
     };
 
     function openIab() {
-        inAppBrowser = cordova.InAppBrowser.open('assets/help/Default.htm', '_blank', 'location=yes,hidden=no');
+        inAppBrowser = cordova.InAppBrowser.open('assets/help/Default.htm', '_self', 'location=yes,hidden=no');
         inAppBrowser.addEventListener('loadstop', iabLoadStop);
     }
 
